@@ -176,7 +176,10 @@ class Router(object):
             device = Common.LOCAL['node'][node]['device']
             type   = Common.GLOBAL['device'][device]['type']
             data[node] = {}
-            data[node]['ip']          = Common.GLOBAL['device'][device]['ip']
+            try:
+                data[node]['ip']          = Common.LOCAL['device'][device]['ip']
+            except:
+                data[node]['ip']          = Common.GLOBAL['device'][device]['ip']
             data[node]['community']   = Common.GLOBAL['snmp-template'][type]['community'] 
             data[node]['mib_file']    = Common.mib_for_node(node)
             f = open(data[node]['mib_file'])
